@@ -12,7 +12,7 @@ https://www.jb51.net/article/190808.htm
 
 上传的基本原理就是前端根据文件大小，按块大小分成很多块,目前是一个一个块的依次上传上去，暂时还没有开始研究多线程的方式，后期将会深化这一方面的应用。
 创建数据库：
-
+```
 /*
 Navicat MySQL Data Transfer
 
@@ -31,7 +31,7 @@ File Encoding         : 65001
 Date: 2021-01-14 20:43:57
 */
 
-'''
+
 SET FOREIGN_KEY_CHECKS=0;
 
 
@@ -59,13 +59,16 @@ CREATE TABLE `file` (
 -- Records of file
 -- ----------------------------
 INSERT INTO `file` VALUES ('11', 'D:/BaiduNetdiskDownload/2zONpvymyy80sOKugOQmm.mp4', 'f1e93354eefb4ec49e78d0ee04007723', 'mp4', '601020885', '1610509526776', '1610509526776', '29', '20971520', '29', '2zONpvymyy80sOKugOQmm');
-'''
+```
+
+
+
 
 前端划分的方法是：
 首先前台有个上传的file标签：
-'<input name="file" type="file" id="inputfile"/>'
+`<input name="file" type="file" id="inputfile"/>`
 
-'''
+```
 通过jq的形式获取文件的大小、确认分片的大小、定义分片索引、定义分片的起始位置、定义分片结束的位置、截取当前的分片数据、分片的大小、总片数、后缀名
 //获取表单中的file
 var file=$('#inputfile').get(0).files[0];
@@ -95,15 +98,15 @@ var key = hex_md5(filedetails);
 var key10 = parseInt(key,16);
 //把加密的信息 转为一个64位的
 var key62 = Tool._10to62(key10);
-'''
+```
 
-###md5密钥的用处：去数据库中判断是否有该key存在，如果存在，则判断是否已经上传成功了，如果不存在，则开始上传文件。
+### md5密钥的用处：去数据库中判断是否有该key存在，如果存在，则判断是否已经上传成功了，如果不存在，则开始上传文件。
 
-###项目整体流程：
-####项目采用springboot + mybatis+ jquery +thymeleaf组成
+### 项目整体流程：
+#### 项目采用springboot + mybatis+ jquery +thymeleaf组成
 
 添加以下依赖：
-'''
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -222,9 +225,8 @@ var key62 = Tool._10to62(key10);
 
 
 </project>
-
-'''
-'''
+```
+```
 application.yml
 server:
   port: 8080
@@ -271,11 +273,11 @@ spring:
 file:
   basepath: D:/BaiduNetdiskDownload/
  
-'''
+```
 
-###转发Controller
+### 转发Controller
 
-'''
+```
 package com.file.fileupload.controller;
 
 
@@ -320,9 +322,9 @@ public class CommonController {
     }
 }
 
-'''
-###上传下载Controller
-'''
+```
+###  上传下载Controller
+```
 package com.file.fileupload.controller;
 
 
@@ -482,11 +484,11 @@ public class FileController {
 
 
 }
-'''
+```
 
 
-###文件实体类
-'''
+### 文件实体类
+```
 package com.file.fileupload.domain;
 
 
@@ -565,9 +567,9 @@ public class File {
     private String fileKey;
 }
 
-'''
-###FileMapper接口
-'''
+```
+### FileMapper接口
+```
 package com.file.fileupload.mapper;
 
 
@@ -614,11 +616,11 @@ public interface FileMapper {
     List<File> selectAll();
 }
 
-'''
+```
 
 
-###FileMapper.xml
-'''
+### FileMapper.xml
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.file.fileupload.mapper.FileMapper">
@@ -811,11 +813,11 @@ public interface FileMapper {
     from `file`
   </select>
 </mapper>
-'''
+```
 
 
-###IFileService接口
-'''
+### IFileService接口
+```
 package com.file.fileupload.service;
 
 
@@ -845,10 +847,10 @@ public interface IFileService {
     ResponseEntity<Object> createFile(String path,String name);
 }
 
-'''
+```
 
-###FileServiceImpl
-'''
+### FileServiceImpl
+```
 package com.file.fileupload.service.impl;
 
 
@@ -948,10 +950,10 @@ public class FileServiceImpl implements IFileService {
     }
 }
 
-'''
+```
 
-###Result消息返回工具类
-'''
+### Result消息返回工具类
+```
 package com.file.fileupload.utils;
 
 
@@ -1110,10 +1112,10 @@ public class Result {
 
 }
 
-'''
+```
 
-###File.html
-'''
+### File.html
+```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1249,10 +1251,10 @@ public class Result {
     </body>
 </html>
 
-'''
+```
 
-###download.html
-'''
+### download.html
+``` 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -1265,7 +1267,7 @@ public class Result {
     </div>
 </body>
 </html>
-'''
+```
 
 
 
