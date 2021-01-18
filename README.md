@@ -12,6 +12,7 @@ https://www.jb51.net/article/190808.htm
 
 上传的基本原理就是前端根据文件大小，按块大小分成很多块,目前是一个一个块的依次上传上去，暂时还没有开始研究多线程的方式，后期将会深化这一方面的应用。
 创建数据库：
+![数据库](./img/Image.png)
 ```
 /*
 Navicat MySQL Data Transfer
@@ -103,6 +104,8 @@ var key62 = Tool._10to62(key10);
 ### md5密钥的用处：去数据库中判断是否有该key存在，如果存在，则判断是否已经上传成功了，如果不存在，则开始上传文件。
 
 ### 项目整体流程：
+![流程图](./img/Image1.png)
+
 #### 项目采用springboot + mybatis+ jquery +thymeleaf组成
 
 添加以下依赖：
@@ -1268,7 +1271,7 @@ public class Result {
 </body>
 </html>
 ```
-
+![显示过程图](./img/show.gif)
 
 
 
